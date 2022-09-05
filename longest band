@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int largestband(vector<int> arr){
+    int n=arr.size(),large=1;
+    unordered_set<int> s;
+    for(int x:arr){
+        s.insert(x);
+    }
+    for(auto y:s){
+        int parent=y-1;
+        if(s.find(parent)==s.end()){
+            int cnt=1,curr=y+1;
+            while(s.find(curr)!=s.end()){
+                curr++;
+                cnt++;
+            }
+            if(cnt>large)
+                large=cnt;
+        }
+    }
+    return large;
+}
+
+int main(){
+
+	vector<int> arr{1, 9, 3, 0, 18, 5, 2, 10, 7, 12, 6, 4};
+	cout << largestband(arr)<<endl;
+
+	return 0;
+}
