@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> subarraySort(vector<int> arr){
+    int n=arr.size(),index1,index2;
+    vector<int> v(1,0);
+    int smallest = INT_MAX;
+	int largest = INT_MIN;
+    for(int i=1;i<n-1;i++){
+        if((arr[i]>arr[i-1] and arr[i]>arr[i+1]) or arr[i-1]>arr[i]){
+            largest=max(largest,arr[i]);
+            smallest=min(smallest,arr[i]);
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(arr[i]>smallest){
+            index1=i;
+            break;
+        }
+    }
+    for(int i=n-1;i>0;i--){
+        if(arr[i]<largest){
+            index2=i;
+            break;
+        }
+    }
+    v[0]=index1;
+    v.push_back(index2);
+    //v[1]=smallest;
+    return v;
+    
+}
+
+int main() {
+    vector<int> arr = {1, 2, 3, 4, 5, 8, 6, 7, 9, 10, 11};
+    vector<int> x;
+    
+    x=subarraySort(arr);
+    copy(x.begin(), x.end(),
+         std::ostream_iterator<int>(cout," "));
+    //cout<< p.first <<" and "<<p.second <<endl;
+
+    return 0;
+}
